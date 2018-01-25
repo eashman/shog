@@ -21,13 +21,13 @@ module Shog
     def call( severity, time, progname, msg )
       return if msg.blank? || _silence?( msg )
 
-      msg = [
-        _tagged( time, :timestamp ),
-        _tagged( progname, :progname ),
-        _tagged( formatted_severity_tag( severity ), :severity),
-        formatted_message( severity, msg )
-      ].compact.join(" ")
-      #msg = formatted_message( severity, msg )
+      # msg = [
+      #   _tagged( time, :timestamp ),
+      #   _tagged( progname, :progname ),
+      #   _tagged( formatted_severity_tag( severity ), :severity),
+      #   formatted_message( severity, msg )
+      # ].compact.join(" ")
+      msg = formatted_message( severity, msg )
       super severity, time, progname, msg
     end
 
