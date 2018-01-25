@@ -24,10 +24,10 @@ module Shog
       msg = [
         _tagged( time, :timestamp ),
         _tagged( progname, :progname ),
-        formatted_severity_tag( severity ),
+        _tagged( formatted_severity_tag( severity ), :severity),
         formatted_message( severity, msg )
       ].compact.join(" ")
-
+      #msg = formatted_message( severity, msg )
       super severity, time, progname, msg
     end
 
@@ -267,6 +267,16 @@ module Shog
       configuration[:progname] = enable
       self
     end
+
+
+    # Include the severity in logged messages.
+    # @param [Boolean] enable or disable tagging with the severity of log messages.
+    # @return [Formatter] self.
+    def severity( enable = true )
+      configuration[:severity] = enable
+      self
+    end
+
 
     # @!endgroup
 
